@@ -82,22 +82,18 @@ FROM registry.access.redhat.com/ubi9/openjdk-21:1.21
 
 ENV LANGUAGE='en_US:en'
 
-# Copy semua hasil build Quarkus
 COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
 COPY --chown=185 target/quarkus-app/*.jar /deployments/
 COPY --chown=185 target/quarkus-app/app/ /deployments/app/
 COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
 
-# Expose port yang digunakan Railway (default 8080, tapi bisa pakai 9003 juga)
 EXPOSE 9003
-
-# Jalankan dengan user non-root
 USER 185
 
-# ✅ Tambahan penting agar Quarkus membaca PORT dari Railway
-ENV QUARKUS_HTTP_PORT=${PORT}
+# ✅ JANGAN SET ENV QUARKUS_HTTP_PORT!
+# Hapus baris ini:
+# ENV QUARKUS_HTTP_PORT=${PORT}
 
-# Java options dan main JAR
 ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
