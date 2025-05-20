@@ -87,7 +87,7 @@ COPY --chown=185 target/quarkus-app/*.jar /deployments/
 COPY --chown=185 target/quarkus-app/app/ /deployments/app/
 COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
 
-EXPOSE 9003
+EXPOSE 8080
 USER 185
 
 # ✅ JANGAN SET ENV QUARKUS_HTTP_PORT!
