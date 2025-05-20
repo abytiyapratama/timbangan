@@ -1,0 +1,3 @@
+org\acme\entity\NotaTimbangan.class
+org\acme\resource\NotaTimbanganResource.class
+org\acme\scheduler\NotaAutoDeleteScheduler.class
