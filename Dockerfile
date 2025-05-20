@@ -99,4 +99,6 @@ ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
 ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
 
-Force rebuild to reset cached port
+# Dockerfile for Quarkus App
+# Force rebuild - [2025-05-20]
+
