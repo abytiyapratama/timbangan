@@ -17,6 +17,10 @@ io.agroal:agroal-api::jar:2.6
 io.agroal:agroal-narayana::jar:2.6
 io.agroal:agroal-pool::jar:2.6
 io.github.crac:org-crac::jar:0.1.3
+io.micrometer:micrometer-commons::jar:1.14.7
+io.micrometer:micrometer-core::jar:1.14.7
+io.micrometer:micrometer-observation::jar:1.14.7
+io.micrometer:micrometer-registry-prometheus-simpleclient::jar:1.14.7
 io.netty:netty-buffer::jar:4.1.119.Final
 io.netty:netty-codec-dns::jar:4.1.119.Final
 io.netty:netty-codec-haproxy::jar:4.1.119.Final
@@ -36,6 +40,11 @@ io.opentelemetry.semconv:opentelemetry-semconv::jar:1.28.0-alpha
 io.opentelemetry:opentelemetry-api-incubator::jar:1.44.1-alpha
 io.opentelemetry:opentelemetry-api::jar:1.44.1
 io.opentelemetry:opentelemetry-context::jar:1.44.1
+io.prometheus:simpleclient::jar:0.16.0
+io.prometheus:simpleclient_common::jar:0.16.0
+io.prometheus:simpleclient_tracer_common::jar:0.16.0
+io.prometheus:simpleclient_tracer_otel::jar:0.16.0
+io.prometheus:simpleclient_tracer_otel_agent::jar:0.16.0
 io.quarkus.arc:arc::jar:3.22.3
 io.quarkus.resteasy.reactive:resteasy-reactive-common-types::jar:3.22.3
 io.quarkus.resteasy.reactive:resteasy-reactive-common::jar:3.22.3
@@ -62,6 +71,8 @@ io.quarkus:quarkus-hibernate-validator::jar:3.22.3
 io.quarkus:quarkus-jackson::jar:3.22.3
 io.quarkus:quarkus-jdbc-postgresql::jar:3.22.3
 io.quarkus:quarkus-jsonp::jar:3.22.3
+io.quarkus:quarkus-micrometer-registry-prometheus::jar:3.22.3
+io.quarkus:quarkus-micrometer::jar:3.22.3
 io.quarkus:quarkus-mutiny::jar:3.22.3
 io.quarkus:quarkus-narayana-jta::jar:3.22.3
 io.quarkus:quarkus-netty::jar:3.22.3
@@ -151,6 +162,7 @@ org.glassfish.expressly:expressly::jar:5.0.0
 org.glassfish.jaxb:jaxb-core::jar:4.0.5
 org.glassfish.jaxb:jaxb-runtime::jar:4.0.5
 org.glassfish.jaxb:txw2::jar:4.0.5
+org.hdrhistogram:HdrHistogram::jar:2.2.2
 org.hibernate.common:hibernate-commons-annotations::jar:7.0.3.Final
 org.hibernate.orm:hibernate-core::jar:6.6.14.Final
 org.hibernate.orm:hibernate-graalvm::jar:6.6.14.Final
@@ -167,6 +179,7 @@ org.jboss.threads:jboss-threads::jar:3.8.0.Final
 org.jboss:jboss-transaction-spi::jar:8.0.0.Final
 org.jctools:jctools-core::jar:4.0.5
 org.jspecify:jspecify::jar:1.0.0
+org.latencyutils:LatencyUtils::jar:2.0.3
 org.postgresql:postgresql::jar:42.7.5
 org.reactivestreams:reactive-streams::jar:1.0.4
 org.slf4j:slf4j-api::jar:2.0.6
