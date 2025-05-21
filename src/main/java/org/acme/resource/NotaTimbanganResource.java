@@ -9,6 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.entity.NotaTimbangan;
+import io.quarkus.panache.common.Sort;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
@@ -21,19 +22,21 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class NotaTimbanganResource {
 
+    // ✅ Simpan nota timbangan baru
     @POST
     @Transactional
     public NotaTimbangan createNota(NotaTimbangan nota) {
-        nota.createdAt = LocalDateTime.now(); // ✅ Supabase butuh ini agar tidak NULL
+        // Set otomatis jika tidak diisi
+        if (nota.tanggalTimbang == null) nota.tanggalTimbang = LocalDate.now();
+        if (nota.waktu == null) nota.waktu = LocalTime.now();
+        if (nota.petugasTimbang == null) nota.petugasTimbang = "Hendra Bhakti";
+        if (nota.tandaTanganPetugas == null) nota.tandaTanganPetugas = nota.petugasTimbang;
 
-        nota.tanggalTimbang = LocalDate.now();
-        nota.waktu = LocalTime.now();
-        nota.petugasTimbang = "Hendra Bhakti";
-        nota.tandaTanganPetugas = "Hendra Bhakti";
-
+        // Hitung netto
         nota.netto1 = nota.beratKotor - nota.beratTara;
         nota.netto2 = nota.netto1 - (nota.netto1 * (nota.potongan / 100.0));
 
+        // Generate nomor nota unik
         long countToday = NotaTimbangan.find("tanggalTimbang = ?1", nota.tanggalTimbang).count();
         String nomorUrut = String.format("%04d", countToday + 1);
         nota.nomorNota = "NOTA-" + nota.tanggalTimbang.toString().replace("-", "") + "-" + nomorUrut;
@@ -42,11 +45,13 @@ public class NotaTimbanganResource {
         return nota;
     }
 
+    // ✅ Ambil semua nota
     @GET
     public List<NotaTimbangan> getAll() {
-        return NotaTimbangan.listAll();
+        return NotaTimbangan.listAll(Sort.descending("createdAt"));
     }
 
+    // ✅ Ambil nota 1 bulan terakhir
     @GET
     @Path("/recent")
     public List<NotaTimbangan> getRecent() {
@@ -54,6 +59,7 @@ public class NotaTimbanganResource {
         return NotaTimbangan.find("createdAt >= ?1 ORDER BY createdAt DESC", satuBulanLalu).list();
     }
 
+    // ✅ Export PDF berdasarkan ID nota
     @GET
     @Path("/pdf/{id}")
     @Produces("application/pdf")
